@@ -1,9 +1,38 @@
-<!DOCTYPE html>
-    <head>
-        <title>Teste</title>
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <h2> <%= pokemon.name %> </h2>
-    </body>
-</html>
+<%- include("partials/header") %>
+        <h1>Hello Mundo</h1>
+        <div class="container bg-secondary text-center">
+            <div class="row bg-success">
+                <div class="col">
+                    <h2>Name</h2>
+                </div>
+                <div class="col">
+                    <h2>Other Name</h2>
+                </div>
+                <div class="col">
+                    <h2>No.</h2>
+                </div>
+                <div class="col">
+                    <h2>Gender Ratio</h2>
+                </div>
+                <div class="col">
+                    <h2>Type</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h2><%= pokemon.name %></h2>
+                </div>
+                <div class="col">
+                    <h2>Working</h2>
+                </div>
+                <div class="col">
+                    <h2><%= pokemon.no %></h2>
+                </div>
+                <div class="col">
+                    <h2>Working</h2>
+                </div>
+                <div class="col">
+                    <h2><%= pokemon.types %></h2>
+            </div>
+        </div>
+<%- include("partials/header") %>

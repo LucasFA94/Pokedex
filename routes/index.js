@@ -1,6 +1,6 @@
-const {pokeApi, getPokemon} = require("../services/pokeApi");
-const { default: axios } = require('axios');
+const {getPokemonFull} = require("../services/pokeApi");
 
+let {Pokemon} = require ('../class/Pokemon')
 
 var express = require('express');
 
@@ -9,14 +9,21 @@ var router = express.Router();
 
 
 /* GET home page. */
-router.get('/:id', async function(req, res, next) {
+router.get('/:id', function(req, res, next) {
 
   let id = req.params.id;
 
-  getPokemon(id)
-  .then(result=> res.render('index', {
-    pokemon: result
-  }));
+
+  getPokemonFull(id)
+  .then(result=> {
+     res.render('index', {
+     pokemon: result
+  })}
+  )
+  .catch(err=>{
+    console.log(`Error: ${err}`)
+})
+
 
 
 });
