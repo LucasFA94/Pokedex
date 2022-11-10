@@ -1,4 +1,4 @@
-const {getPokemon, getPokemonSpecie} = require("../services/pokeApi");
+const {getPokemon, getPokemonSpecie} = require("../services/PokeApi");
 
 class Pokemon {
 

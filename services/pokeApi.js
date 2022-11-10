@@ -1,44 +1,58 @@
-var axios = require('axios');
-
-//base pokeUrl
-const pokeApi = axios.create({
-    baseURL: "https://pokeapi.co/api/v2"
-});
-
-//process
-const process = (string,id)=> {
-    return pokeApi.get(`${string}/${id}`)
-    .then(response=> response.data)
-    .catch(err=>{
-        console.log(`Error: ${err}`)
-    })
-}
-
-//Catch pokemon data
-const getPokemon = (id) => {
-        
-    return process("pokemon",id)
-    .then(result=>result)
-
-}
-
-const getPokemonSpecie = (id) => {
-    return process("pokemon-species",id)
-    .then(result=>result)
-}
+const axios = require('axios');
 
 
-const getPokemonFull = (id) =>{
-    return axios.all([
-        getPokemon(id), 
-        getPokemonSpecie(id)
-    ]).then(axios.spread((pokemon,pokemonSpecie)=>({
-        name: pokemon.name,
-        no: pokemonSpecie.pokedex_numbers[0].entry_number,
-        gender: pokemonSpecie.gender_rate<0? "genderless": {male: 1, female: 2},
-        types: pokemon.types.map((type)=>{
-            return type.type.name;
+class PokeApi{
+    //base pokeUrl
+
+    static #pokeApi = axios.create({
+        baseURL: "https://pokeapi.co/api/v2"
+    });
+  
+
+    //process
+    static #process = (string,id)=> {
+        return this.#pokeApi.get(`${string}/${id}`)
+        .then(response=> response.data)
+        .catch(err=>{
+            console.log(`Error: ${err}`)
         })
-    })))
+    }
+
+    //Catch pokemon data
+    static getPokemon = (id) => {
+    return this.#process("pokemon",id)
+    .then(result=>result)
+    .catch(err=>console.err(err));
+    }
+
+    static getPokemonSpecie = (id) => {
+        return this.#process("pokemon-species",id)
+        .then(result=>result)
+        .catch(err=>console.err(err));
+    }
+
+    static getPokemonFull = (id) =>{
+        return axios.all([
+            this.getPokemon(id), 
+            this.getPokemonSpecie(id)
+        ])
+        .then(axios.spread((pokemon,pokemonSpecie)=>({
+            name: pokemon.name,
+            no: pokemonSpecie.pokedex_numbers[0].entry_number,
+            gender: pokemonSpecie.gender_rate<0? "genderless": {male: 1, female: 2},
+            types: pokemon.types.map((type)=>{
+                return type.type.name;
+            })
+        })))
+        .catch((err)=>{
+            console.err(err.response.data);
+        })
+    }
+
 }
-module.exports = {getPokemon, getPokemonSpecie, getPokemonFull};
+
+
+
+
+
+module.exports = PokeApi;
