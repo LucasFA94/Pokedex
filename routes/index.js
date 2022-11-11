@@ -1,4 +1,4 @@
-const {getPokemonFull, getPokemon, process} = require("../services/PokeApi");
+const {getPokemonFull} = require("../services/PokeApi");
 
 
 
@@ -19,7 +19,7 @@ router.get('/:id', function(req, res, next) {
      pokemon: result
   })})
   .catch(err=>{
-    console.err(`Error: ${err}`)
+    console.log(`Error: ${err}`)
 })
 
 
