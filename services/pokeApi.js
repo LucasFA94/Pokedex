@@ -38,6 +38,9 @@ class PokeApi{
             this.getPokemonSpecie(id)
         ])
         .then(axios.spread((pokemon,pokemonSpecie)=>({
+            pictures:{
+                oficial: pokemon.sprites.other.home.front_default
+            },
             name: this.#makingName(pokemon.name),
             nameList: this.#allNames(pokemonSpecie.names),
             no: pokemonSpecie.pokedex_numbers[0].entry_number,
@@ -57,17 +60,16 @@ class PokeApi{
         return String[0].toUpperCase() + String.substr(1);
     }
 
-    //Name List
+    //Get names from other language
     static #allNames = (list)=>{
         let result = list.map((lang)=>{
             let name = lang.name
             let lName = lang.language.name
             let language = ISO6391.getName(lName);
-            return {language:language, name:name}
+            return {language:language, name:name};
         }).filter((lang)=> lang.language !== "")
 
-        console.log(result);
-        return list
+        return result;
 
     }
 

@@ -1,12 +1,13 @@
 <%- include("partials/header") %>
         <h1>Hello Mundo</h1>
         <div class="container bg-secondary text-center">
+            <img src=<%= pokemon.pictures.oficial %>>
             <div class="row bg-success">
                 <div class="col">
                     <h2>Name</h2>
                 </div>
                 <div class="col">
-                    <h2>Other Name</h2>
+                    <h2>Language: Name</h2>
                 </div>
                 <div class="col">
                     <h2>No.</h2>
@@ -23,7 +24,11 @@
                     <h2><%= pokemon.name %></h2>
                 </div>
                 <div class="col">
-                    <h2>Working</h2>
+                    <ul style="list-style-type: none;">
+                        <% for(var i=0; i<pokemon.nameList.length; i++) {%>
+                           <li><%= pokemon.nameList[i].language %>: <%= pokemon.nameList[i].name %></li>
+                        <% } %>
+                    </ul>
                 </div>
                 <div class="col">
                     <h2><%= pokemon.no %></h2>
