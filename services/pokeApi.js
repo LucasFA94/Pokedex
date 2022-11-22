@@ -39,7 +39,7 @@ class PokeApi{
         ])
         .then(axios.spread((pokemon,pokemonSpecie)=>({
             pictures:{
-                oficial: pokemon.sprites.other.home.front_default
+                oficial: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
             },
             name: this.#makingName(pokemon.name),
             nameList: this.#allNames(pokemonSpecie.names),
