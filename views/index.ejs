@@ -26,7 +26,7 @@
                 <div class="col">
                     <ul style="list-style-type: none;">
                         <% for(var i=0; i<pokemon.nameList.length; i++) {%>
-                           <li><%= pokemon.nameList[i].language %>: <%= pokemon.nameList[i].name %></li>
+                           <li> <i class="flag flag-united-states"></i> <%= pokemon.nameList[i].language %>: <%= pokemon.nameList[i].name %></li>
                         <% } %>
                     </ul>
                 </div>
@@ -38,6 +38,41 @@
                 </div>
                 <div class="col">
                     <h2 class="type"><%= pokemon.types %></h2>
+                </div>
+            </div>
+            <div class="row bg-success">
+                <div class="col">
+                    <h2>Classification</h2>
+                </div>
+                <div class="col">
+                    <h2>Height</h2>
+                </div>
+                <div class="col">
+                    <h2>Weight</h2>
+                </div>
+                <div class="col">
+                    <h2>Capture Rate</h2>
+                </div>
+                <div class="col">
+                    <h2>Base Egg Steps</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h2><%= pokemon.classification %></h2>
+                </div>
+                <div class="col">
+                    <h2><%= pokemon.height %></h2>
+                </div>
+                <div class="col">
+                    <h2><%= pokemon.weight %></h2>
+                </div>
+                <div class="col">
+                    <h2>Working</h2>
+                </div>
+                <div class="col">
+                    <h2>Working</h2>
+                </div>
             </div>
         </div>
-<%- include("partials/header") %>
+<%- include("partials/footer") %>

@@ -37,7 +37,8 @@ class PokeApi{
             this.getPokemon(id), 
             this.getPokemonSpecie(id)
         ])
-        .then(axios.spread((pokemon,pokemonSpecie)=>({
+        .then(axios.spread((pokemon,pokemonSpecie)=>(
+            {
             pictures:{
                 oficial: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
             },
@@ -47,7 +48,10 @@ class PokeApi{
             gender: pokemonSpecie.gender_rate<0? "genderless": {male: 1, female: 2},
             types: pokemon.types.map((type)=>{
                 return this.#makingName(type.type.name);
-            })
+            }),
+            classification: this.#getGenus(pokemonSpecie.genera),
+            height: this.#getHeight(pokemon.height),
+            weight: this.#getWeight(pokemon.weight),
         })))
         .catch((err)=>{
             console.err(err.response.data);
@@ -71,6 +75,24 @@ class PokeApi{
 
         return result;
 
+    }
+
+    //Get Classification in en
+    static #getGenus = (values)=>{
+        const result = values.find(value => value.language.name == "en");
+        return result.genus
+    }
+
+    //get height in meters
+    static #getHeight = (h)=>{
+        let height = h/ 10.0;
+        return `${height}m`
+    }
+
+    //get weight in kg
+    static #getWeight = (w)=>{
+        let weight = w/ 10.0;
+        return `${weight}kg`
     }
 
 }

@@ -15,7 +15,6 @@ router.get('/:id', function(req, res, next) {
 
   getPokemonFull(id)
   .then(result=> {
-    console.log(result);
      res.render('index', {
      pokemon: result
   })})
