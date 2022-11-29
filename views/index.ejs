@@ -74,5 +74,13 @@
                     <h2><%= pokemon.hatch %></h2>
                 </div>
             </div>
+            <div class="row bg-success">
+                <div class="col">
+                    <h2>Abilities: <% pokemon.abilities.ability.forEach(ability=>{ %>
+                        <%= ability %>
+                    <% }); %> <% if (pokemon.abilities.hidden !== ''){%> <%= pokemon.abilities.hidden %> (HA) <%}%>
+                    </h2>
+                </div>
+            </div>
         </div>
 <%- include("partials/footer") %>
