@@ -52,6 +52,8 @@ class PokeApi{
             classification: this.#getGenus(pokemonSpecie.genera),
             height: this.#getHeight(pokemon.height),
             weight: this.#getWeight(pokemon.weight),
+            captureRate: pokemonSpecie.capture_rate,
+            hatch: this.#getHatchCounter(pokemonSpecie.hatch_counter)
         })))
         .catch((err)=>{
             console.err(err.response.data);
@@ -80,19 +82,24 @@ class PokeApi{
     //Get Classification in en
     static #getGenus = (values)=>{
         const result = values.find(value => value.language.name == "en");
-        return result.genus
+        return result.genus;
     }
 
     //get height in meters
     static #getHeight = (h)=>{
         let height = h/ 10.0;
-        return `${height}m`
+        return `${height}m`;
     }
 
     //get weight in kg
     static #getWeight = (w)=>{
         let weight = w/ 10.0;
-        return `${weight}kg`
+        return `${weight}kg`;
+    }
+
+    //get hatch counter
+    static #getHatchCounter = (n) =>{
+        return n * 256;
     }
 
 }
