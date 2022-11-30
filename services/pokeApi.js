@@ -1,4 +1,5 @@
 const axios = require('axios');
+const {getAbilities} = require('../services/PokeApiAbility')
 const ISO6391 = require('iso-639-1')
 
 class PokeApi{
@@ -54,7 +55,7 @@ class PokeApi{
             weight: this.#getWeight(pokemon.weight),
             captureRate: pokemonSpecie.capture_rate,
             hatch: this.#getHatchCounter(pokemonSpecie.hatch_counter),
-            abilities: this.#getAbilities(pokemon.abilities)
+            abilities: getAbilities(pokemon.abilities)
         })))
         .catch((err)=>{
             console.err(err.response.data);
@@ -101,18 +102,6 @@ class PokeApi{
     //get hatch counter
     static #getHatchCounter = (n) =>{
         return n * 256;
-    }
-
-    //get abilities
-    static #getAbilities = (a) =>{
-        let obj = {ability:[], hidden: ''}
-        a.forEach(ability=>{
-            let value = this.#makingName(ability.ability.name);
-            ability.is_hidden? obj.hidden = value : obj.ability.push(value);  
-        });
-
-
-        return obj;
     }
 
 }
